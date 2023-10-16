@@ -23,13 +23,17 @@ public:
 
 		Solicitar = InternetOpen(L"ConsoleApplication1", INTERNET_OPEN_TYPE_PRECONFIG, 0, 0, 0);
 		if (Solicitar == NULL)
+		{
 			cout << "Ocorreu um erro durante a operação..\n" << GetLastError();
+		}
 		else
 		{
 			Autenticar = InternetConnect(Solicitar, Servidor.c_str(), INTERNET_DEFAULT_FTP_PORT, Usuario.c_str(),
 				Senha.c_str(), INTERNET_SERVICE_FTP, INTERNET_FLAG_HYPERLINK | INTERNET_FLAG_TRANSFER_BINARY, 0);
 			if (Autenticar == NULL)
+			{
 				cout << "Ocorreu um erro ao efetuar a autenticação..\n" << GetLastError();
+			}
 			else
 			{
 				bRetorno = true;
@@ -42,9 +46,13 @@ public:
 	void CriarDiretorio(wstring Diretorio, bool Remover)
 	{
 		if (Remover == true)
+		{
 			FtpRemoveDirectory(Autenticar, Diretorio.c_str());
+		}
 		else
+		{
 			FtpCreateDirectory(Autenticar, Diretorio.c_str());
+		}
 	}
 
 	void EnviarArquivo(wstring ArquivoLocal, wstring LocalRemoto)
